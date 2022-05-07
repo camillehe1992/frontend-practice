@@ -31,3 +31,28 @@ app.all("*", (req, res, next) => {
   next();
 });
 ```
+
+### 关于 CORS 相关的 response headers 及其释义
+
+- Access-Control-Allow-Origin: 可以把资源共享给那些域名，支持 \* 及 特定域名
+- Access-Control-Allow-Credentials: 请求是否可以带 cookie
+- Access-Control-Allow-Methods: 请求所允许的方法, 「用于预请求 (preflight request) 中」
+- Access-Control-Allow-Headers: 请求所允许的头，「用于预请求 (preflight request) 中」
+- Access-Control-Expose-Headers: 那些头可以在响应中列出
+- Access-Control-Max-Age: 预请求的缓存时间
+
+### CORS 与 Vary: Origin
+
+如果 static.shanyue.tech 资源被 CDN 缓存，bar.shanyue.tech 再次访问资源时，因缓存问题，因此此时返回的是 Access-Control-Allow-Origin: foo.shanyue.tech，此时会有跨域问题。此时，`Vary: Origin` 就上场了，代表为不同的 `Origin` 缓存不同的资源。
+
+### HSTS 与 CORS
+
+HSTS (HTTP Strict Transport Security) 为了避免 HTTP 跳转到 HTTPS 时遭受潜在的中间人攻击，由浏览器本身控制到 HTTPS 的跳转。如同 CORS 一样，它也是有一个服务器的响应头来控制
+`Strict-Transport-Security: max-age=5184000`
+此时浏览器访问该域名时，会使用 307 Internal Redirect，无需服务器干涉，自动跳转到 HTTPS 请求。如果前端访问 HTTP 跨域请求，此时浏览器通过 HSTS 跳转到 HTTPS，但浏览器不会给出相应的 CORS 响应头部，就会发生跨域问题。
+
+### 服务器异常处理与跨域异常
+
+当与其他中间件一起工作时，也有可能出现问题，由于不正确的执行顺序也可能导致跨域失败。
+
+假设有一个参数校验中间件，置于 CORS 中间件上方，由于校验失败，并未穿过 CORS 中间件，在前端会报错跨域失败，真正的参数校验问题掩盖其中。
