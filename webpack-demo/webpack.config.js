@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: {
     index: "./src/index.js",
     print: "./src/print.js",
@@ -11,6 +11,18 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
     clean: true,
+  },
+  // enable source map to track code in order to make debugging easier
+  devtool: "inline-source-map",
+  // setup webpack-dev-server
+  // keep bundle files in memory
+  devServer: {
+    static: "./dist",
+  },
+  // add this config when there are multi entrypoint on a single HTML page,
+  // otherwise, we conld get into trouble
+  optimization: {
+    runtimeChunk: "single",
   },
   module: {
     rules: [
@@ -22,6 +34,7 @@ module.exports = {
     ],
   },
   plugins: [
+    // generate HTML files (index.html) and inject bundle files automatically in /dist
     new HtmlWebpackPlugin({
       title: "Webpack Demo",
     }),
