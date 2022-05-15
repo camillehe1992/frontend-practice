@@ -5,7 +5,7 @@ module.exports = {
   mode: "development",
   entry: {
     index: "./src/index.js",
-    print: "./src/print.js",
+    another: "./src/another-module.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -23,6 +23,10 @@ module.exports = {
   // otherwise, we conld get into trouble
   optimization: {
     runtimeChunk: "single",
+    // separate duplicated dependencies from chunk files
+    splitChunks: {
+      chunks: "all",
+    },
   },
   module: {
     rules: [
