@@ -7,23 +7,6 @@
     </v-list-item>
 
     <v-divider></v-divider>
-
-    <!-- <v-list dense nav>
-      <v-list-item
-        v-for="item in items"
-        :key="item.title"
-        :to="`/${item.title.toLowerCase()}`"
-      >
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-
-        </v-list-item-content>
-      </v-list-item>
-    </v-list> -->
     <v-list nav>
       <v-list-group
         v-for="item in items"
@@ -59,6 +42,13 @@ export default {
     return {
       items: [
         { title: "Dashboard", icon: "mdi-view-dashboard" },
+        {
+          title: "Extra Topic",
+          icon: "mdi-view-dashboard",
+          items: [
+            { title: "Reactivity In Depth", route: "reactivity-in-depth" },
+          ],
+        },
         { title: "Pokemon", icon: "mdi-pokemon-go" },
         {
           title: "Evolution",

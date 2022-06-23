@@ -3,7 +3,12 @@
     <v-card-title> {{ pokemon.name }} # {{ pokemon.id }} </v-card-title>
 
     <v-divider></v-divider>
-    <v-img :src="pokemon.sprite" width="100%"> </v-img>
+    <v-img
+      :src="pokemon.sprite"
+      lazy-src="../../assets/pokemon.jpg"
+      width="100%"
+    >
+    </v-img>
 
     <v-divider></v-divider>
     <v-card-text>

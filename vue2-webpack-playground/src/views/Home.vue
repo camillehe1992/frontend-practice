@@ -1,9 +1,12 @@
 <template>
-  <div>Home</div>
+  <PokemonHome></PokemonHome>
 </template>
 
 <script>
-export default {};
+import PokemonHome from "./PokemonHome.vue";
+export default {
+  components: { PokemonHome },
+};
 </script>
 
 <style lang="scss" scoped>

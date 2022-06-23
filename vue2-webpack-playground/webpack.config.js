@@ -7,7 +7,7 @@ module.exports = {
     main: "./src/main.js",
   },
   output: {
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
@@ -25,17 +25,17 @@ module.exports = {
       {
         test: /\.s(c|a)ss$/,
         use: [
-          'vue-style-loader',
-          'css-loader',
+          "vue-style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader'
+            loader: "sass-loader",
           },
         ],
       },
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
-      }
+        use: ["vue-style-loader", "css-loader"],
+      },
     ],
   },
   plugins: [
@@ -64,5 +64,5 @@ module.exports = {
         },
       },
     },
-  }
+  },
 };
