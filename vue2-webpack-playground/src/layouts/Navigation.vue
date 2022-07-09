@@ -47,6 +47,7 @@ export default {
           icon: "mdi-view-dashboard",
           items: [
             { title: "Reactivity In Depth", route: "reactivity-in-depth" },
+            { title: "Watch Array", route: "watch-array" },
           ],
         },
         { title: "Pokemon", icon: "mdi-pokemon-go" },

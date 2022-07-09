@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "./views/Home.vue";
 import Dashboard from "./views/Dashboard.vue";
 import ReactivityInDepth from "./components/extra-topic/ReactivityInDepth.vue";
+import WatchArray from "./components/extra-topic/WatchArray.vue";
 import PokemonHome from "./views/PokemonHome.vue";
 import EvolutionChain from "./components/evolution/EvolutionChain.vue";
 import About from "./views/About.vue";
@@ -19,6 +20,11 @@ const routes = [
     path: "/reactivity-in-depth",
     name: "ReactivityInDepth",
     component: ReactivityInDepth,
+  },
+  {
+    path: "/watch-array",
+    name: "WatchArray",
+    component: WatchArray,
   },
   // {
   //   path: "/dashboard",
