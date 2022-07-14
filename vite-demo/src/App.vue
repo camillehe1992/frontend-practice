@@ -6,6 +6,7 @@ import CompositionAPI from "./components/CompositionAPI.vue";
 import SuspenseTemp from "./components/SuspenseTemp.vue";
 import TeleportTemp from "./components/TeleportTemp.vue";
 import MousePost from "./components/MousePost.vue";
+import Counter from "./components/Counter.vue";
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import MousePost from "./components/MousePost.vue";
   <suspense-temp></suspense-temp>
   <teleport-temp></teleport-temp>
   <mouse-post></mouse-post>
+  <Counter></Counter>
 </template>
 
 <style>
