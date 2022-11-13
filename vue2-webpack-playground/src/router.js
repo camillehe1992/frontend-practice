@@ -7,6 +7,7 @@ import WatchArray from "./components/extra-topic/WatchArray.vue";
 import PokemonHome from "./views/PokemonHome.vue";
 import EvolutionChain from "./components/evolution/EvolutionChain.vue";
 import BasicSearch from "./components/reactive-search/BasicSearch.vue";
+import FacetedSearchWithVue from "./components/reactive-search/FacetedSearchWithVue.vue";
 import About from "./views/About.vue";
 
 Vue.use(VueRouter);
@@ -49,6 +50,11 @@ const routes = [
     path: "/basic-search",
     name: "basicSearch",
     component: BasicSearch,
+  },
+  {
+    path: "/faceted-search-with-vue",
+    name: "facetedSearchWithVue",
+    component: FacetedSearchWithVue,
   },
   {
     path: "/about",

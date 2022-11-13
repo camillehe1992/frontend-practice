@@ -63,8 +63,9 @@ export default {
           title: "Reactive Search",
           icon: "mdi-magnify",
           items: [
-            { title: "Basic Search", route: "basic-search"}
-          ]
+            { title: "Basic Search", route: "basic-search" },
+            { title: "Faceted Search", route: "faceted-search-with-vue" },
+          ],
         },
         { title: "About", icon: "mdi-help-box" },
       ],

@@ -9,6 +9,7 @@ import {
   DataSearch,
   MultiList,
   SingleRange,
+  ToggleButton,
   ReactiveList,
 } from "@appbaseio/reactivesearch-vue";
 
@@ -18,6 +19,7 @@ Vue.use(ReactiveBase);
 Vue.use(DataSearch);
 Vue.use(MultiList);
 Vue.use(SingleRange);
+Vue.use(ToggleButton);
 Vue.use(ReactiveList);
 
 new Vue({
