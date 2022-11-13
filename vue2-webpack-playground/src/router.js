@@ -6,6 +6,7 @@ import ReactivityInDepth from "./components/extra-topic/ReactivityInDepth.vue";
 import WatchArray from "./components/extra-topic/WatchArray.vue";
 import PokemonHome from "./views/PokemonHome.vue";
 import EvolutionChain from "./components/evolution/EvolutionChain.vue";
+import BasicSearch from "./components/reactive-search/BasicSearch.vue";
 import About from "./views/About.vue";
 
 Vue.use(VueRouter);
@@ -17,6 +18,12 @@ const routes = [
     component: Home,
   },
   {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+  },
+  // Extra Topics
+  {
     path: "/reactivity-in-depth",
     name: "ReactivityInDepth",
     component: ReactivityInDepth,
@@ -26,26 +33,23 @@ const routes = [
     name: "WatchArray",
     component: WatchArray,
   },
-  // {
-  //   path: "/dashboard",
-  //   name: "Dashboard",
-  //   component: Dashboard,
-  // },
-  // {
-  //   path: "extra-topic",
-  //   name: "ExtraTopic",
-  //   component: ExtraTopic,
-  // },
-  // {
-  //   path: "/pokemon",
-  //   name: "pokemon",
-  //   component: PokemonHome,
-  // },
-  // {
-  //   path: "/evolution-chain",
-  //   name: "evolutionChain",
-  //   component: EvolutionChain,
-  // },
+  // Pokemon
+  {
+    path: "/pokemon",
+    name: "pokemon",
+    component: PokemonHome,
+  },
+  {
+    path: "/evolution-chain",
+    name: "evolutionChain",
+    component: EvolutionChain,
+  },
+  // Reactive Search
+  {
+    path: "/basic-search",
+    name: "basicSearch",
+    component: BasicSearch,
+  },
   {
     path: "/about",
     name: "About",

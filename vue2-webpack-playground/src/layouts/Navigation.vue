@@ -59,6 +59,13 @@ export default {
             { title: "Trigger", route: "evolution-trigger" },
           ],
         },
+        {
+          title: "Reactive Search",
+          icon: "mdi-magnify",
+          items: [
+            { title: "Basic Search", route: "basic-search"}
+          ]
+        },
         { title: "About", icon: "mdi-help-box" },
       ],
       right: null,
