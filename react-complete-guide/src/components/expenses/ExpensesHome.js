@@ -31,10 +31,10 @@ const ExpensesHome = () => {
     setExpenses((previousExpense) => [expense, ...previousExpense]);
   };
   return (
-    <div>
+    <>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
-    </div>
+    </>
   );
 };
 

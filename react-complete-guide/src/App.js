@@ -1,15 +1,15 @@
 import "./App.css";
 import UserHome from "./components/User/UserHome";
-// import ExpensesHome from "./components/Expenses/ExpensesHome";
-// import CourseGoal from "./components/CourseGoals/CourseGoal";
+import CourseGoal from "./components/CourseGoals/CourseGoal";
+import ExpensesHome from "./components/Expenses/ExpensesHome";
 
 const App = () => {
   return (
-    <div>
+    <>
       <UserHome />
-      {/* <CourseGoal />
-      <ExpensesHome /> */}
-    </div>
+      <CourseGoal />
+      <ExpensesHome />
+    </>
   );
 };
 

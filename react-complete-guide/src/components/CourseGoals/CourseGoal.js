@@ -36,7 +36,7 @@ const CourseGoal = () => {
   }
 
   return (
-    <div>
+    <>
       <section id="goal-form">
         <CourseInput onAddGoal={addGoalHandler} />
       </section>
@@ -50,7 +50,7 @@ const CourseGoal = () => {
         ) // <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
         } */}
       </section>
-    </div>
+    </>
   );
 };
 

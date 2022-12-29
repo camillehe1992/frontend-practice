@@ -16,10 +16,10 @@ const UserHome = () => {
     });
   };
   return (
-    <div>
+    <>
       <AddUser onSave={addUser} />
       <UserList items={users} />
-    </div>
+    </>
   );
 };
 
