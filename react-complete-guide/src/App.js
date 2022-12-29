@@ -1,12 +1,14 @@
 import "./App.css";
-import ExpensesHome from "./components/Expenses/ExpensesHome";
-import CourseGoal from "./components/CourseGoals/CourseGoal";
+import UserHome from "./components/User/UserHome";
+// import ExpensesHome from "./components/Expenses/ExpensesHome";
+// import CourseGoal from "./components/CourseGoals/CourseGoal";
 
 const App = () => {
   return (
     <div>
-      <CourseGoal />
-      <ExpensesHome />
+      <UserHome />
+      {/* <CourseGoal />
+      <ExpensesHome /> */}
     </div>
   );
 };
