@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import "./App.css";
+import Form from "./components/Form/Form";
 // import Counter from "./components/Counter/Counter";
-import MoviesHome from "./components/Movies/MoviesHome";
+// import MoviesHome from "./components/Movies/MoviesHome";
 // import UserHome from "./components/User/UserHome";
 // import CourseGoal from "./components/CourseGoals/CourseGoal";
 // import ExpensesHome from "./components/Expenses/ExpensesHome";
@@ -21,8 +22,7 @@ function App() {
         {!ctx.isLoggedIn && <Login />}
         {ctx.isLoggedIn && <Home />}
       </main> */}
-      {/* <Counter /> */}
-      <MoviesHome />
+      <Form />
     </>
   );
 }
