@@ -1,45 +1,36 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import MoviesList from "./MoviesList";
 import "./MoviesHome.module.css";
 import AddMovie from "./AddMovie";
+import useHttp from "../../hooks/use-http";
 
 function MoviesHome() {
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchMovies = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch("https://swapi.dev/api/films");
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-      const data = await response.json();
-      setMovies(
-        data.results.map((item) => {
-          return {
-            id: item.episode_id,
-            title: item.title,
-            openingText: item.opening_crawl,
-            releaseDate: item.release_date,
-          };
-        })
-      );
-    } catch (error) {
-      setError(error.message);
-    }
-    setIsLoading(false);
-  }, []);
+  const { isLoading, error, sendRequest: fetchMovies } = useHttp();
 
   useEffect(() => {
-    fetchMovies();
+    const transformMovies = (movies) => {
+      const loadedMovies = movies.results.map((item) => {
+        return {
+          id: item.episode_id,
+          title: item.title,
+          openingText: item.opening_crawl,
+          releaseDate: item.release_date,
+        };
+      });
+      setMovies(loadedMovies);
+    };
+    fetchMovies(
+      {
+        url: "https://swapi.dev/api/films",
+      },
+      transformMovies
+    );
   }, [fetchMovies]);
 
   const addMovie = (movie) => {
-    // use firebase for forking server
+    setMovies((prev) => prev.concat(movie));
   };
 
   let content = <p>Found no movies</p>;

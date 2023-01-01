@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import "./App.css";
+// import Counter from "./components/Counter/Counter";
 import MoviesHome from "./components/Movies/MoviesHome";
 // import UserHome from "./components/User/UserHome";
 // import CourseGoal from "./components/CourseGoals/CourseGoal";
@@ -12,7 +13,7 @@ import AuthContext from "./store/auth-context";
 
 function App() {
   const ctx = useContext(AuthContext);
-  
+
   return (
     <>
       {/* <MainHeader />
@@ -20,6 +21,7 @@ function App() {
         {!ctx.isLoggedIn && <Login />}
         {ctx.isLoggedIn && <Home />}
       </main> */}
+      {/* <Counter /> */}
       <MoviesHome />
     </>
   );

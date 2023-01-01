@@ -11,14 +11,20 @@ function AddMovie(props) {
     event.preventDefault();
 
     // could add validation here...
+    if (
+      titleRef.current.value.trim().length > 0 &&
+      openingTextRef.current.value.trim().length > 0 &&
+      releaseDateRef.current.value.trim().length > 0
+    ) {
+      const movie = {
+        id: Math.random().toLocaleString(),
+        title: titleRef.current.value,
+        openingText: openingTextRef.current.value,
+        releaseDate: releaseDateRef.current.value,
+      };
 
-    const movie = {
-      title: titleRef.current.value,
-      openingText: openingTextRef.current.value,
-      releaseDate: releaseDateRef.current.value,
-    };
-
-    props.onAddMovie(movie);
+      props.onAddMovie(movie);
+    }
   }
 
   return (
