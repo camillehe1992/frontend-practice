@@ -30,29 +30,35 @@ const AvailableMeals = (props) => {
     );
   }, [fetchMeals]);
 
-  let content = <p>Found no meals</p>;
-
   if (isLoading) {
-    content = <p>Loading...</p>;
+    return (
+      <section>
+        <p className={classes.mealsLoading}>Loading...</p>;
+      </section>
+    );
   }
 
   if (error) {
-    content = <p>{error}</p>;
-  }
-
-  if (meals.length > 0) {
-    content = (
-      <ul>
-        {meals.map((meal) => (
-          <MealItem key={meal.id} {...meal} />
-        ))}
-      </ul>
+    return (
+      <setion>
+        <p className={classes.mealsError}>{error}</p>;
+      </setion>
     );
   }
 
   return (
     <section className={classes.meals}>
-      <Card>{content}</Card>
+      <Card>
+        {meals.length === 0 ? (
+          <p>Found no meals</p>
+        ) : (
+          <ul>
+            {meals.map((meal) => (
+              <MealItem key={meal.id} {...meal} />
+            ))}
+          </ul>
+        )}
+      </Card>
     </section>
   );
 };
