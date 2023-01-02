@@ -16,3 +16,7 @@
   font: inherit;
   padding-left: 0.5rem;
 }
+
+.error {
+  color: #b40e0e;
+}
