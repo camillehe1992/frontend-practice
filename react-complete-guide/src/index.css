@@ -10,3 +10,7 @@ body {
   margin: 0;
   background-color: #272727;
 }
+
+main {
+  margin-top: 6rem;
+}

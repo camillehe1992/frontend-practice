@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const VALID_EMAIL = "test@test.com";
+const VALID_PASS = "password123";
+
 const initialState = {
   isAuthenticated: localStorage.getItem("isAuthenticated") === "1",
 };
