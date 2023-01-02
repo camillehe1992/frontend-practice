@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import "./App.css";
-import Form from "./components/Form/Form";
+// import Form from "./components/Form/Form";
 // import Counter from "./components/Counter/Counter";
 // import MoviesHome from "./components/Movies/MoviesHome";
 // import UserHome from "./components/User/UserHome";
@@ -10,19 +11,20 @@ import Form from "./components/Form/Form";
 // import Login from "./components/Login/Login";
 // import Home from "./components/Home/Home";
 // import MainHeader from "./components/MainHeader/MainHeader";
-import AuthContext from "./store/auth-context";
+// import AuthContext from "./store/auth-context";
+
+// import Counter from "./components/Redux-Demo/Counter";
+import Header from "./components/Redux-Demo/Header";
+import Auth from "./components/Redux-Demo/Auth";
+import UserProfile from "./components/Redux-Demo/UserProfile";
 
 function App() {
-  const ctx = useContext(AuthContext);
-
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
     <>
-      {/* <MainHeader />
-      <main>
-        {!ctx.isLoggedIn && <Login />}
-        {ctx.isLoggedIn && <Home />}
-      </main> */}
-      <Form />
+      <Header />
+      {!isAuth && <Auth />}
+      {isAuth && <UserProfile />}
     </>
   );
 }
