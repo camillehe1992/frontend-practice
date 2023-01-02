@@ -18,7 +18,7 @@ const SimpleInput = (props) => {
 
   const blurName = (event) => {
     setEnteredNameTouched(true);
-    if (enteredName.trim() === "") {
+    if (!enteredNameIsValid) {
       return;
     }
   };
