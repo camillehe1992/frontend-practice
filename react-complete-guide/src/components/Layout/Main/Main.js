@@ -4,6 +4,7 @@ import Card from "../../UI/Card";
 import Navigation from "../Navigation/Navigation";
 import classes from "./Main.module.css";
 
+import Shop from "../../../components/Shop/Shop";
 import Counter from "../../../components/Counter/Counter";
 import MoviesHome from "../../../components/Movies/MoviesHome";
 import UserHome from "../../../components/User/UserHome";
@@ -11,8 +12,9 @@ import CourseGoal from "../../../components/CourseGoals/CourseGoal";
 import ExpensesHome from "../../../components/Expenses/ExpensesHome";
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState("Counter");
+  const [activeTab, setActiveTab] = useState("Shop");
   const views = [
+    "Shop",
     "Counter",
     "MoviesHome",
     "UserHome",
@@ -26,6 +28,9 @@ const Home = () => {
 
   let viewContent = <Counter />;
   switch (activeTab) {
+    case "Shop":
+      viewContent = <Shop />;
+      break;
     case "MoviesHome":
       viewContent = <MoviesHome />;
       break;
