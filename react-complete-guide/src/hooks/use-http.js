@@ -1,5 +1,11 @@
 import { useState, useCallback } from "react";
 
+const API_URL = "http://localhost:1337/parse";
+const HEADERS = {
+  "X-Parse-Application-Id": "APPLICATION_ID",
+  "Content-Type": "application/json",
+};
+
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -8,9 +14,9 @@ const useHttp = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(requestConfig.url, {
+      const response = await fetch(`${API_URL}/${requestConfig.path}`, {
         method: requestConfig.method ? requestConfig.method : "GET",
-        headers: requestConfig.headers ? requestConfig.headers : {},
+        headers: requestConfig.headers ? requestConfig.headers : HEADERS,
         body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       });
       if (!response.ok) {
