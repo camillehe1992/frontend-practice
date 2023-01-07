@@ -48,6 +48,33 @@ export async function addQuote(quoteData) {
   return null;
 }
 
+export async function updateQuote(quoteId, updatedQuote) {
+  const response = await fetch(`${API_URL}/quotes/${quoteId}`, {
+    headers,
+    method: "PUT",
+    body: JSON.stringify(updatedQuote),
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not update quote.");
+  }
+  return null;
+}
+
+export async function deleteQuote(quoteId) {
+  const response = await fetch(`${API_URL}/quotes/${quoteId}`, {
+    headers,
+    method: "DELETE",
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not delete quote.");
+  }
+  return null;
+}
+
 export async function addComment(commentData) {
   const response = await fetch(`${API_URL}/comments`, {
     headers,
@@ -80,4 +107,17 @@ export async function getAllComments(quoteId) {
       };
     })
     .filter((commit) => commit.quoteId === quoteId);
+}
+
+export async function deleteComment(commentId) {
+  const response = await fetch(`${API_URL}/comments/${commentId}`, {
+    headers,
+    method: "DELETE",
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not delete commnet.");
+  }
+  return null;
 }

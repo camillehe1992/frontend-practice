@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, Route, Link, useRouteMatch } from "react-router-dom";
 import Comments from "../components/comments/Comments";
+import DeleteQuote from "../components/quotes/DeleteQuote";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
@@ -40,6 +41,7 @@ const QuoteDetail = () => {
 
   return (
     <>
+      <DeleteQuote quoteId={quoteId} />
       <HighlightedQuote text={loadedQuote.text} author={loadedQuote.author} />
       <Route path={match.path} exact>
         <div className="centered">
