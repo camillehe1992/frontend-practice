@@ -1,6 +1,6 @@
 import { useHistory, useLocation } from "react-router-dom";
-import QuoteItem from "./QuoteItem";
 import classes from "./QuoteList.module.css";
+import QuoteItem from "./QuoteItem";
 
 const QuoteList = (props) => {
   const history = useHistory();
@@ -21,7 +21,10 @@ const QuoteList = (props) => {
   const sortedQuotes = sortQuotes(props.quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
-    history.push(`/quotes?sort=${isSortingAscending ? "desc" : "asc"}`);
+    history.push({
+      pathname: location.pathname,
+      search: `?sort=${isSortingAscending ? "desc" : "asc"}`,
+    });
   };
 
   return (
