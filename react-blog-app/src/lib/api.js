@@ -1,11 +1,11 @@
-const API_URL = "http://localhost:1337/parse/classes";
+const API_URL = "http://localhost:1337/parse";
 const headers = {
   "X-Parse-Application-Id": "APPLICATION_ID",
   "Content-Type": "application/json",
 };
 
 export async function getAllQuotes() {
-  const response = await fetch(`${API_URL}/quotes`, { headers });
+  const response = await fetch(`${API_URL}/classes/quotes`, { headers });
   const { results: data } = await response.json();
 
   if (!response.ok) {
@@ -21,7 +21,9 @@ export async function getAllQuotes() {
 }
 
 export async function getSingleQuote(quoteId) {
-  const response = await fetch(`${API_URL}/quotes/${quoteId}`, { headers });
+  const response = await fetch(`${API_URL}/classes/quotes/${quoteId}`, {
+    headers,
+  });
   const data = await response.json();
 
   if (!response.ok) {
@@ -35,7 +37,7 @@ export async function getSingleQuote(quoteId) {
 }
 
 export async function addQuote(quoteData) {
-  const response = await fetch(`${API_URL}/quotes`, {
+  const response = await fetch(`${API_URL}/classes/quotes`, {
     headers,
     method: "POST",
     body: JSON.stringify(quoteData),
@@ -49,7 +51,7 @@ export async function addQuote(quoteData) {
 }
 
 export async function updateQuote(quoteId, updatedQuote) {
-  const response = await fetch(`${API_URL}/quotes/${quoteId}`, {
+  const response = await fetch(`${API_URL}/classes/quotes/${quoteId}`, {
     headers,
     method: "PUT",
     body: JSON.stringify(updatedQuote),
@@ -62,8 +64,11 @@ export async function updateQuote(quoteId, updatedQuote) {
   return null;
 }
 
-export async function deleteQuote(quoteId) {
-  const response = await fetch(`${API_URL}/quotes/${quoteId}`, {
+export async function deleteQuote({ quoteId, comments }) {
+  // delete all comments for a sepcific quote
+  await deleteCommentForQuote(comments);
+  // delete a specific quote
+  const response = await fetch(`${API_URL}/classes/quotes/${quoteId}`, {
     headers,
     method: "DELETE",
   });
@@ -76,7 +81,7 @@ export async function deleteQuote(quoteId) {
 }
 
 export async function addComment(commentData) {
-  const response = await fetch(`${API_URL}/comments`, {
+  const response = await fetch(`${API_URL}/classes/comments`, {
     headers,
     method: "POST",
     body: JSON.stringify(commentData),
@@ -91,14 +96,13 @@ export async function addComment(commentData) {
 }
 
 export async function getAllComments(quoteId) {
-  const response = await fetch(`${API_URL}/comments`, { headers });
+  const response = await fetch(`${API_URL}/classes/comments`, { headers });
 
   const { results: data } = await response.json();
 
   if (!response.ok) {
     throw new Error(data.message || "Could not get comments.");
   }
-  console.log(data);
 
   return data
     .map((comment) => {
@@ -113,15 +117,24 @@ export async function getAllComments(quoteId) {
     );
 }
 
-export async function deleteComment(commentId) {
-  const response = await fetch(`${API_URL}/comments/${commentId}`, {
+export async function deleteCommentForQuote(comments) {
+  const requests = comments.map((comment) => {
+    return {
+      method: "DELETE",
+      path: `/parse/classes/comments/${comment.id}`,
+    };
+  });
+  const response = await fetch(`${API_URL}/batch`, {
     headers,
-    method: "DELETE",
+    method: "POST",
+    body: JSON.stringify({
+      requests,
+    }),
   });
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not delete commnet.");
+    throw new Error(data.message || "Could not delete commnets.");
   }
   return null;
 }

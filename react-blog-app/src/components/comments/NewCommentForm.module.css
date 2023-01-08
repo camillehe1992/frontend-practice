@@ -26,20 +26,16 @@
 
 .control textarea {
   font: inherit;
-  padding: 0.35rem;
+  padding: 0.15rem;
   border-radius: 4px;
   background-color: #f0f0f0;
   border: 1px solid #c1d1d1;
   display: block;
   width: 100%;
-  font-size: 1.25rem;
+  /* font-size: 1.25rem; */
 }
 
 .control textarea:focus {
   background-color: #cbf8f8;
   outline-color: teal;
-}
-
-.actions button {
-  font-size: 1.25rem;
 }

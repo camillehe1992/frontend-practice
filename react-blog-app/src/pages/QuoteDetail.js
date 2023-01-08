@@ -9,7 +9,7 @@ const QuoteDetail = () => {
   const { quote, comments } = useLoaderData();
   return (
     <>
-      <DeleteQuote quoteId={quote.id} />
+      <DeleteQuote quoteId={quote.id} comments={comments} />
       <HighlightedQuote text={quote.text} author={quote.author} />
       <Comments quoteId={quote.id} comments={comments} />
     </>

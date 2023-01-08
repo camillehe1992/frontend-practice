@@ -25,7 +25,10 @@ function DeleteQuote(props) {
   };
 
   const deleteQuoteHandler = () => {
-    sendRequest(props.quoteId);
+    sendRequest({
+      quoteId: props.quoteId,
+      comments: props.comments,
+    });
   };
 
   return (
