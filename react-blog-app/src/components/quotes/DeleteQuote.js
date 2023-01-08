@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./DeleteQuote.module.css";
 import Modal from "../UI/Modal";
 import useHttp from "../../hooks/use-http";
 import { deleteQuote } from "../../lib/api";
 
 function DeleteQuote(props) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { sendRequest, status } = useHttp(deleteQuote);
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     if (status === "completed") {
-      history.push("/quotes");
+      navigate("/quotes");
     }
-  }, [status, history]);
+  }, [status, navigate]);
 
   const showAlertHandler = () => {
     setShowAlert(true);

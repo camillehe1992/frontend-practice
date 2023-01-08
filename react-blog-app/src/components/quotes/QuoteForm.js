@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import { Prompt } from "react-router-dom";
+import { useRef } from "react";
 
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
@@ -8,8 +7,6 @@ import classes from "./QuoteForm.module.css";
 const QuoteForm = (props) => {
   const authorInputRef = useRef();
   const textInputRef = useRef();
-
-  const [isEntering, setIsEntering] = useState(false);
 
   function submitFormHandler(event) {
     event.preventDefault();
@@ -26,26 +23,10 @@ const QuoteForm = (props) => {
     });
   }
 
-  const formFocusHandler = () => {
-    setIsEntering(true);
-  };
-
-  const finishEnteringActionHandler = () => {
-    setIsEntering(false);
-  };
-
   return (
     <>
-      <Prompt
-        when={isEntering}
-        message={() => "Are you sure you want to leave?"}
-      />
       <Card>
-        <form
-          className={classes.form}
-          onSubmit={submitFormHandler}
-          onFocus={formFocusHandler}
-        >
+        <form className={classes.form} onSubmit={submitFormHandler}>
           {props.isLoading && (
             <div className={classes.loading}>
               <LoadingSpinner />
@@ -61,9 +42,7 @@ const QuoteForm = (props) => {
             <textarea id="text" rows="5" ref={textInputRef}></textarea>
           </div>
           <div className={classes.actions}>
-            <button className="btn" onClick={finishEnteringActionHandler}>
-              Add Quote
-            </button>
+            <button className="btn">Add Quote</button>
           </div>
         </form>
       </Card>
