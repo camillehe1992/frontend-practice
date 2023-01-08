@@ -9,6 +9,7 @@ const CommentsList = (props) => {
           key={comment.id}
           commentId={comment.id}
           text={comment.text}
+          createdAt={comment.createdAt}
         />
       ))}
     </ul>

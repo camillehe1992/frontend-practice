@@ -1,50 +1,43 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
+import { useFetcher } from "react-router-dom";
 import classes from "./NewCommentForm.module.css";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import { addComment } from "../../lib/api";
-import useHttp from "../../hooks/use-http";
 
 const NewCommentForm = (props) => {
-  const commentTextRef = useRef();
+  const commentRef = useRef();
+  const fetcher = useFetcher();
 
-  const { sendRequest, status, error } = useHttp(addComment);
-
-  const { onAddedComment, quoteId } = props;
-
-  useEffect(() => {
-    if (status === "completed" && !error) {
-      onAddedComment();
-    }
-  }, [status, error, onAddedComment]);
-
-  const submitFormHandler = (event) => {
-    event.preventDefault();
-
-    // optional: Could validate here
-    const enteredComment = commentTextRef.current.value;
-
-    // send comment to server
-    sendRequest({ text: enteredComment, quoteId });
-
-    commentTextRef.current.value = "";
-  };
+  if (fetcher.state !== "idle") {
+    commentRef.current.value = "";
+  }
 
   return (
-    <form className={classes.form} onSubmit={submitFormHandler}>
-      {status === "pending" && (
-        <div className="centered">
+    <fetcher.Form
+      className={classes.form}
+      method="post"
+      action={`/quotes/${props.quoteId}`}
+      disabled={props.submitting}
+    >
+      {fetcher.state === "submitting" && (
+        <div className={classes.loading}>
           <LoadingSpinner />
         </div>
       )}
 
-      <div className={classes.control} onSubmit={submitFormHandler}>
+      <div className={classes.control}>
         <label htmlFor="comment">Your Comment</label>
-        <textarea id="comment" rows="5" ref={commentTextRef}></textarea>
+        <textarea
+          id="comment"
+          rows="3"
+          name="comment-text"
+          required
+          ref={commentRef}
+        ></textarea>
       </div>
       <div className={classes.actions}>
         <button className="btn">Add Comment</button>
       </div>
-    </form>
+    </fetcher.Form>
   );
 };
 

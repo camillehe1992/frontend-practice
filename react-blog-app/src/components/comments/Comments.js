@@ -1,70 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
 import classes from "./Comments.module.css";
 import NewCommentForm from "./NewCommentForm";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import CommentsList from "./CommentsList";
-import { getAllComments } from "../../lib/api";
-import useHttp from "../../hooks/use-http";
 
-const Comments = () => {
-  const [isAddingComment, setIsAddingComment] = useState(false);
-  const { quoteId } = useParams();
-
-  const {
-    sendRequest,
-    status,
-    data: loadedComments,
-  } = useHttp(getAllComments, true);
-
-  useEffect(() => {
-    sendRequest(quoteId);
-  }, [sendRequest, quoteId]);
-
-  const startAddCommentHandler = () => {
-    setIsAddingComment(true);
-  };
-
-  const addedCommentHandler = useCallback(() => {
-    sendRequest(quoteId);
-  }, [sendRequest, quoteId]);
-
-  let comments;
-
-  if (status === "pending") {
-    comments = (
-      <div className="centered">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
-  if (status === "completed" && loadedComments) {
-    comments = <CommentsList comments={loadedComments} />;
-  }
-
-  if (
-    status === "completed" &&
-    (!loadedComments || loadedComments.length === 0)
-  ) {
-    comments = <p>No comments found!</p>;
-  }
-
+const Comments = (props) => {
   return (
     <section className={classes.comments}>
-      <h2>User Comments</h2>
-      {!isAddingComment && (
-        <button className="btn" onClick={startAddCommentHandler}>
-          Add a Comment
-        </button>
+      <NewCommentForm quoteId={props.quoteId} />
+      {!props.comments && (
+        <div className="centered">
+          <LoadingSpinner />
+        </div>
       )}
-      {isAddingComment && (
-        <NewCommentForm
-          quoteId={quoteId}
-          onAddedComment={addedCommentHandler}
-        />
-      )}
-      {comments}
+      {props.comments.length === 0 && <p>No comments found!</p>}
+      <CommentsList comments={props.comments} />
     </section>
   );
 };

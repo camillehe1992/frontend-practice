@@ -45,7 +45,7 @@ export async function addQuote(quoteData) {
   if (!response.ok) {
     throw new Error(data.message || "Could not create quote.");
   }
-  return null;
+  return data;
 }
 
 export async function updateQuote(quoteId, updatedQuote) {
@@ -98,6 +98,7 @@ export async function getAllComments(quoteId) {
   if (!response.ok) {
     throw new Error(data.message || "Could not get comments.");
   }
+  console.log(data);
 
   return data
     .map((comment) => {
@@ -106,7 +107,10 @@ export async function getAllComments(quoteId) {
         ...comment,
       };
     })
-    .filter((commit) => commit.quoteId === quoteId);
+    .filter((commit) => commit.quoteId === quoteId)
+    .sort((commentA, commentB) =>
+      new Date(commentA.createdAt) < new Date(commentB.createdAt) ? 1 : -1
+    );
 }
 
 export async function deleteComment(commentId) {
