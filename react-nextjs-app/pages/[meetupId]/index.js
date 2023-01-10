@@ -1,16 +1,51 @@
+import Head from "next/head";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
+import { getMeetup, listMeetups } from "../../lib/api";
 
-const mock_meetup = {
-  id: "m1",
-  title: "A First Meetup",
-  image:
-    "https://s.cn.bing.net/th?id=OHR.HummockIce_ZH-CN9917832145_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50",
-  address: "Some address 5, 12345 Some City",
-  description: "This is a first meetup!",
+const Meetup = (props) => {
+  return (
+    <>
+      <Head>
+        <title>{props.meetup.id}</title>
+        <meta name="description" content={props.meetup.description}></meta>
+      </Head>
+      <MeetupDetail {...props.meetup} />;
+    </>
+  );
 };
 
-const Meetup = () => {
-  return <MeetupDetail {...mock_meetup} />;
+export const getStaticPaths = async () => {
+  const meetups = await listMeetups();
+
+  return {
+    fallback: false,
+    paths: meetups.map((meetup) => ({
+      params: { meetupId: meetup.id },
+    })),
+  };
+};
+
+// dedicated function that is called in build process before rendering page
+export const getStaticProps = async (context) => {
+  const { meetupId } = context.params;
+  // fetch data from an API
+  try {
+    const meetup = await getMeetup({ meetupId });
+    return {
+      props: {
+        meetup: meetup,
+      },
+      revalidate: 3,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        meetup: {},
+      },
+      revalidate: 3,
+    };
+  }
 };
 
 export default Meetup;

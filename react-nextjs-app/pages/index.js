@@ -1,26 +1,39 @@
+import Head from "next/head";
 import MeetupList from "../components/meetups/MeetupList";
+import { listMeetups } from "../lib/api";
 
-const DUMMY_MEETUPS = [
-  {
-    id: "m1",
-    title: "A First Meetup",
-    image:
-      "https://s.cn.bing.net/th?id=OHR.HummockIce_ZH-CN9917832145_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50",
-    address: "Some address 5, 12345 Some City",
-    description: "This is a first meetup!",
-  },
-  {
-    id: "m2",
-    title: "A Second Meetup",
-    image:
-      "https://s.cn.bing.net/th?id=OHR.HummockIce_ZH-CN9917832145_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50",
-    address: "Some address 10, 12345 Some City",
-    description: "This is a second meetup!",
-  },
-];
+const HomePage = (props) => {
+  return (
+    <>
+      <Head>
+        <title>React Meetups</title>
+        <meta name="description" content="A React Meetups demo"></meta>
+      </Head>
+      <MeetupList meetups={props.meetups} />;
+    </>
+  );
+};
 
-const HomePage = () => {
-  return <MeetupList meetups={DUMMY_MEETUPS} />;
+// dedicated function that is called in build process before rendering page
+export const getStaticProps = async () => {
+  // fetch data from an API
+  try {
+    const meetups = await listMeetups();
+    return {
+      props: {
+        meetups,
+      },
+      revalidate: 3,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        meetups: [],
+      },
+      // revalidate: 10,
+    };
+  }
 };
 
 export default HomePage;
